@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+    
+
+    
+<title>CareMeds-  care for you</title>
+    
+
+    <!-- Place favicon.png in the root directory -->
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+   </h:head>
+    <h:body>
+    
+        <a href="index.xhtml">Home page</a>
+        <a href="Userords.xhtml">My orders</a>
+      <!-- Login AREA START () -->
+       
+        <div>
+            <h:form id="form">
+                <p:dataGrid var="product" value="#{userOrd.allProducts()}" columns="3" layout="grid"
+                            rows="6" paginator="true" paginatorPosition="top" id="cars"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16">
+
+                    <f:facet name="header">
+                        Products for Sale
+                    </f:facet>
+
+                    <div class="product-grid-item card" style="margin-bottom: 0">
+                        <div class="product-grid-item-top">
+                            <div>
+                                <h4><b><i class="pi pi-tag product-category-icon"/>
+                                        <span class="product-category">#{product.catId.catName}</span></b></h4>
+                            </div>
+                              <div>
+                                <h4><b><i class="pi pi-tag product-category-icon"/>
+                                        <span class="product-category">#{product.brId.brandName}</span></b></h4>
+                            </div>
+                        </div>
+                        <table>
+                            <tr>
+                                <td>
+                                   
+                                    <img src="Uploads/Products/#{product.prImgpath}" height="200px" width="300px" style="
+                            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+                            margin: 2rem 0;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="product-name"><h3><b>#{product.prName}</b></h3></div> 
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <h:outputText value="#{product.prPrice}" style=" font-size: 16px">
+                                        <f:convertNumber currencySymbol="₹" type="currency"/>
+                                    </h:outputText>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <p style=" font-size: 12px">#{product.prDesc}</p>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <h:commandButton action="#{userorderbean.addToCart(product.prId)}" class="form-control btn btn-danger" value="Add To Cart"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </p:dataGrid>
+
+                
+            </h:form>
+        </div>
+      
+    
+    </h:body>
+</html>

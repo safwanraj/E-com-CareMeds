@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+      
+    <persistence-unit name="ProjectPU" transaction-type="JTA">
+            
+        <jta-data-source>jdbc/_mycare</jta-data-source>
+          
+   
+        <class>entity.Permission</class>
+                  
+        <class>entity.Rolepermission</class>
+                  
+        <class>entity.Roles</class>
+         <class>entity.TblCart</class>
+         <class>entity.TblOrder</class>
+         <class>entity.TblOrderdetail</class>
+       
+       
+                  
+        <class>entity.Userrole</class>
+                  
+        <class>entity.Users</class>
+                  
+        <class>entity.Category</class>
+                  
+        <class>entity.Brand</class>
+         <class>entity.Products</class>
+                  
+    
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        
+            
+        <properties/>
+<!--        <properties>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"></property>
+        </properties>-->
+    </persistence-unit>
+    
+</persistence>

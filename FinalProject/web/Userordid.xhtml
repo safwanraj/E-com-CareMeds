@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+    
+
+    
+<title>CareMeds-  care for you</title>
+    
+
+    <!-- Place favicon.png in the root directory -->
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+   </h:head>
+    <h:body>
+    
+        <a href="index.xhtml">Home page</a>
+      <!-- Login AREA START () -->
+                    <div id="content" class="col-sm-12">
+                      
+
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td colspan="2" class="text-left">Order Details</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 50%;" class="text-left"> <b>Order ID:</b> #{userorderbean.currentOrder.orderId}
+                                        <br/>
+                                        <b>Date Added:</b> #{userorderbean.currentOrder.orderDatetime}</td>
+                                    <td style="width: 50%;" class="text-left"> <b>Payment Method:</b> #{userorderbean.currentOrder.paymode}
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td style="width: 50%; vertical-align: top;" class="text-left">Payment Address</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">#{userorderbean.currentOrder.userId.firstName}
+                                        <br/>#{userorderbean.currentOrder.addressline1}
+                                        <br/>#{userorderbean.currentOrder.addressline2}
+                                        <br/>#{userorderbean.currentOrder.landmark}
+                                        <br/>#{userorderbean.currentOrder.pincode}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-responsive">
+                            <p:dataTable var="dtl" value="#{userorderbean.orderDetails(userorderbean.currentOrder.orderId)}">
+                                <p:column headerText="Product Name">
+                                    <h:outputLabel value="#{dtl.products.prName}"/>
+                                </p:column>
+                                <p:column headerText="Category" >
+                                    <h:outputLabel value="#{dtl.products.catId.catName}"/>
+                                </p:column>
+                                 <p:column headerText="Brand" >
+                                     <h:outputLabel value="#{dtl.products.brId.brandName}"/>
+                                </p:column>
+                                <p:column headerText="Quantity" >
+                                    <h:outputLabel value="#{dtl.qty}"/>
+                                </p:column>
+                                <p:column headerText="Price" >
+                                    <h:outputLabel value="₹ #{dtl.products.prPrice}"/>
+                                    <input type="hidden" value="#{userorderbean.total = userorderbean.total + dtl.products.prPrice}" name="txtTot" id="txtTot"/>
+                                </p:column>
+                            </p:dataTable>
+                            
+                            <br/>
+                        </div>
+                        <h3>Order History</h3>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td class="text-left">Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-right">
+                                    <td class="text-left">₹ #{userorderbean.total}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="buttons clearfix">
+                            <div class="pull-left"><a class="btn btn-primary" href="Userords.xhtml">Back</a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <!--Middle Part End-->
+     
+    
+    </h:body>
+</html>
+
+

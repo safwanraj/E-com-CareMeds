@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div>
+           <h:form id="form">
+                      <div class="card crud-demo">
+                          <p:growl id="messages" showDetail="true" />
+                          <p:dataTable id="dt-states" widgetVar="dtStates" var="item" value="#{categoryBean.getallCategoryName()}" 
+                                       reflow="true" class="table dataTable no-footer" rowKey="#{item.catId}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom" 
+                                       emptyMessage="No Record Found"
+                                       filteredValue="#{partbean.filteredparts}"
+                                       globalFilterFunction="#{partbean.globalfilterfunction}">
+                              
+                              <f:facet name="header">
+                 
+                                  <div align="right">
+                                  <span class="filter-container ui-input-icon-left">
+                                      <i class="pi pi-search"></i>
+                                      <p:inputText id="globalFilter" onkeyup="PF('dtStates').filter()" placeholder="search" />
+                                  </span>
+                                  </div>
+                                  
+                              </f:facet>
+                              
+                              <p:column headerText="Cat Id">
+                                  <h:outputText value="#{item.catId}" />
+                              </p:column>
+
+                              <p:column headerText="Category name">
+                                  <h:outputText value="#{item.catName}" />
+                              </p:column>
+                              <p:column headerText="Category Desc.">
+                                  <h:outputText value="#{item.catDesc}" />
+                              </p:column>
+
+                              <p:column headerText="Actions">
+                                  <p:commandButton styleClass="rounded-button ui-button-secondary ui-button-flat" icon="pi pi-pencil" style="color: black" action="#{categoryBean.getCategoryById(item.catId)}"/>
+<!--                                -->
+                               
+                                  <p:commandButton class="rounded-button ui-button-danger ui-button-flat" icon="pi pi-trash" style="color: red" action="#{categoryBean.deleteCategory(item.catId)}" update="@form"/>
+                              </p:column>
+                          </p:dataTable>
+                      </div>
+                  </h:form>  
+        </div>
+    </h:body>
+</html>
+
+
+<!--     <f:view>
+                            <style>
+                                    .ui-datatable .ui-datatable-header {
+                                        text-align: right !important;
+                                    }
+
+                                    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                                        display: none;
+                                    }
+                          </style>
+            <h:form id="form">
+
+                <h:dataTable  var="prd" value="#{productsBean.allProducts}"  border="2" >
+                              paginator="true" rows="10"
+                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rowsPerPageTemplate="5,10,15" id="customerTable" multiViewState="true"> 
+             paginator="true" rows="10"
+             paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+             {PreviousPageLink} {PageLinks} {NextPageLink}
+             {LastPageLink} {RowsPerPageDropdown}"
+             rowsPerPageTemplate="5,10,15"
+             
+                        <h:column >
+                            <f:facet name="header">
+                            <h:outputText value="Product Id"/>
+                            </f:facet>
+                            <h:outputText value="#{prd.prId}"/>
+                        </h:column>
+
+                         <h:column>
+                             <f:facet name="header">
+                            <h:outputText value="Cat.Name"/>
+                        </f:facet>
+                             <h:outputText value="#{prd.catId.catName}"/>
+                        </h:column>                
+                          <h:column >
+                              <f:facet name="header">
+                                <h:outputText value="Brand Name"/>
+                              </f:facet>
+                              <h:outputText value="#{prd.brId.brandName}"/>
+                        </h:column>               
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prd name"/>
+                              </f:facet>
+                            <h:outputText value="#{prd.prName}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Description"/>
+                              </f:facet>
+                            <h:outputText value="#{prd.prDesc}"/>
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">
+                                <h:outputText value="Price"/>
+                              </f:facet>
+                            <h:outputText value="#{prd.prPrice}"/>
+                        </h:column>
+                       <h:column >
+                           <f:facet name="header">
+                                <h:outputText value="Qty."/>
+                              </f:facet>
+                           <h:outputText value="#{prd.prQty}"/>
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">
+                                <h:outputText value="Status"/>
+                              </f:facet>
+                            <h:outputText value="#{prd.prStatus}"/>
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">
+                                <h:outputText value="Image"/>
+                              </f:facet>
+                            <p:graphicImage name="../Uploads/Products/#{prd.prImgpath}" library="demo"
+                                width="32" style="vertical-align: middle"/>
+                            <div>
+                                <img src="../Uploads/Products/IMG_0006.jpg" alt=""/>
+                                <img src="../Uploads/Products/#{prd.prImgpath}" alt=""  width="32" style="vertical-align: middle"/>
+                                </div>
+                                <img src="../Uploads/Products/IMG_0006.jpg" alt=""/>
+                            <p:graphicImage value="../web/Uploads/"/>
+                        </h:column>
+
+                        <h:column >
+                            <f:facet name="header">
+                                <h:outputText value="Edit"/>
+                              </f:facet>
+                            <h:commandLink action="#{productsBean.getProductsById(prd.prId)}" value="Edit"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Delete"/>
+                              </f:facet>
+                            <h:commandLink action="#{productsBean.deleteProduct(prd.prId)}" value="Delete"/>
+                        </h:column>
+                    </h:dataTable>
+  
+            </h:form>
+     </f:view>-->
+
